@@ -17,7 +17,8 @@ int LNDS(int n)
 
         int max = 1;
         int len = 1;
-        for (int i = 1; i < n; i++)
+        int i = 1;
+		for (i = 1; i < n; i++)
         {
                 if (A[i - 1] <= A[i])
                 {
@@ -38,7 +39,8 @@ double r()
 
 void insertion_sort(int *a, int n)
 {
-        for (size_t i = 1; i < n; ++i)
+        size_t i = 1;
+		for (i = 1; i < n; ++i)
         {
                 int tmp = a[i];
                 size_t j = i;

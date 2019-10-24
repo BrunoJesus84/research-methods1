@@ -23,7 +23,8 @@ int LNDS(int n)
 
     int max = 1;
     int len = 1;
-    for (int i = 1; i < n; i++)
+    int i = 1;
+	for (i = 1; i < n; i++)
     {
         if (A[i - 1] <= A[i])
         {
@@ -82,7 +83,7 @@ FILE *arq, *out;
 	fgets(name,29,stdin);					
 	for(i=0; name[i]; i++) if(name[i]=='\n') name[i]=0;	/* Remove the "\n" from string */
 
-	// Open a text file TEXTO in Read Mode
+	// Open a text file TEXTO in Read Mode 
   	arq = fopen(name, "rt");
 
 	if (arq == NULL)  // Open error

@@ -17,7 +17,8 @@ int LNDS(int n)
 
     int max = 1;
     int len = 1;
-    for (int i = 1; i < n; i++)
+    int i = 1;
+    for (i = 1; i < n; i++)
     {
         if (A[i - 1] <= A[i])
         {

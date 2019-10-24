@@ -23,7 +23,8 @@ int LNDS(int n)
 
 	int max = 1;
 	int len = 1;
-	for (int i = 1; i < n; i++)
+	int i = 1;
+	for (i = 1; i < n; i++)
 	{
 		if (A[i - 1] <= A[i])
 		{
@@ -46,10 +47,11 @@ void swap(int *a, int *b)
 
 int partition(int A[], int p, int q)
 {
-	swap(&A[p + (rand() % (q - p + 1))], &A[q]); // PIVOT = A[q]
+	swap(&A[p + (rand() % (q - p + 1))], &A[q]); // PIVOT = A[q] 
 
 	int i = p - 1;
-	for (int j = p; j <= q; j++)
+	int j = p;
+	for (j = p; j <= q; j++)
 	{
 		if (r() > eps)
 		{ // no failure
