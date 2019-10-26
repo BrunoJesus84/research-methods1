@@ -1,5 +1,5 @@
 # Assignment on Research Methods I 
-DESCRIPTION STEP
+DESCRIPTION STEP 1
 
 1. Generate the input sequence to be sorted with the script gen.py in python by
    changing the values of the following variables (PATH:.\rm1\src\PY): 
