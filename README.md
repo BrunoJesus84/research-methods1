@@ -13,6 +13,8 @@ Research Methods 1 Project
  
    > python gen.py > data100.in
    
+   Obs.: Move files to PATH: ".\rm1\in"
+   
 3. Compile the four sorting codes, for instance, in gcc (PATH:.\rm1\src\C):
   
    > gcc quicksort.c -o quick
@@ -26,3 +28,5 @@ Research Methods 1 Project
    
      Enter a OUTPUT file name (eg. 100quick1.out):
    > 100quick1.out
+   
+   Obs.: Move files to eg. PATH: ".\rm1\out\100"
