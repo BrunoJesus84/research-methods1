@@ -88,7 +88,7 @@ int main()
 	int n, i;
 
 	/* Reads a name of the file to open: */
-	printf("\n\n Enter a file name:\n");
+	printf("\n\n Enter a INPUT file name (eg. data100.in):\n");
 	fgets(name, 29, stdin);
 	for (i = 0; name[i]; i++)
 		if (name[i] == '\n')
@@ -126,7 +126,7 @@ int main()
 	quicksort(A, 0, n - 1);
 
 	/* Reads a name of the file to open: */
-	printf("\n\n Enter a file name:\n");
+	printf("\n\n Enter a OUTPUT file name (eg. 100quick1.out):\n");
 	fgets(name, 29, stdin);
 	for (i = 0; name[i]; i++)
 		if (name[i] == '\n')
