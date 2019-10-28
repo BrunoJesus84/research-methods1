@@ -52,3 +52,19 @@ dt[c(2,4),]
 dt[2:4,]
 dt[dt$IsPet == TRUE,]
 dt[dt$HowMany > 10,]
+dt[dt$Name %in% c("Cat", "Pig"),]
+
+# Vectorized operations
+c(1, 2, 3) + c(4, 5, 6)
+
+# Named arguments X ordered arguments
+m <- matrix(data = 1:6, nrow = 2, ncol = 3)
+n <- matrix(1:6, 2, 3)
+m == n
+identical(m, n)
+
+# Installing packages (command line)
+install.packages("ggplot2")
+
+# Loading libraries
+library("ggplot2")
