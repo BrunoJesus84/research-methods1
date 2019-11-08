@@ -1,0 +1,25 @@
+Fault Injection
+---------------
+Computer systems have been increasingly used today. One of the important uses for these systems is critical task resolution that requires quick and accurate response, often in the event of failure. To check how the system will respond to failures there is a process called Fault Injection, in which faults are injected (by simulation) and the system behavior is monitored.
+
+Failures can be related to hardware malfunction or software problems (source code). To simulate Fault Injection, it is possible to associate a special code snippet to the system under test which, under certain random probability, alters the functioning of the code, leading to the failure.
+
+For this work, we simulate crashes in RAM. Such simulation is based on the insertion of a variable that receives a random value that indicates the probability of failure. The failure will be represented by the change in a conditional statement. The codes evaluated are the well-known sorting algorithms detailed in the next section. The algorithms are implemented in C language.
+
+Sorting Algorithms
+------------------
+Bubblesort
+----------
+
+
+Insertionsort
+-------------
+
+
+Mergesort
+---------
+
+
+Quicksort
+---------
+
