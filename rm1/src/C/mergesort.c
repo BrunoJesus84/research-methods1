@@ -1,4 +1,4 @@
-// Adapted from Rosetta Code
+// Adapted from Rosetta Code.
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -9,6 +9,12 @@
 
 int A[MAX], B[MAX];
 double eps;
+int countErr = 0; 
+
+double r()
+{
+    return (double)rand() / (double)RAND_MAX;
+}
 
 // computes the length of the longest non-decreasing string
 //
@@ -18,7 +24,7 @@ int LNDS(int n)
     int max = 1;
     int len = 1;
     int i = 1;
-    for (i = 1; i < n; i++)
+	for (i = 1; i < n; i++)
     {
         if (A[i - 1] <= A[i])
         {
@@ -26,15 +32,13 @@ int LNDS(int n)
             if (len > max)
                 max = len;
         }
-        else
+        else 
+        { 
             len = 1;
+            countErr++;
+        }
     }
     return max;
-}
-
-double r()
-{
-    return (double)rand() / (double)RAND_MAX;
 }
 
 void merge(int *a, int n, int m)
@@ -138,7 +142,7 @@ int main()
 		fprintf(out, " %d", A[i]);
 	}
 	printf("\n");
-	fprintf(out, "\n%d", count);
+	fprintf(out, "\n%d %d", count, countErr);
 	
 	// Close Output File
 	fclose(out);
@@ -152,5 +156,5 @@ int main()
     printf("%d", B[0]);
     for (i = 1; i < n; i++)
         printf(" %d", B[i]);
-    printf("\n%d\n", count);
+    printf("\n%d %d\n", count, countErr);
 }

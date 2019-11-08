@@ -10,6 +10,7 @@
 
 int A[MAX], B[MAX];
 double eps;
+int countErr = 0; 
 
 double r()
 {
@@ -32,8 +33,11 @@ int LNDS(int n)
             if (len > max)
                 max = len;
         }
-        else
+        else 
+        { 
             len = 1;
+            countErr++;
+        }
     }
     return max;
 }
@@ -132,7 +136,7 @@ FILE *arq, *out;
 		fprintf(out, " %d", A[i]);
 	}
 	printf("\n");
-	fprintf(out, "\n%d", count);
+	fprintf(out, "\n%d %d", count, countErr);
 	
 	// Close Output File
 	fclose(out);
@@ -146,7 +150,7 @@ FILE *arq, *out;
     printf("%d", B[0]);
     for (i = 1; i < n; i++)
         printf(" %d", B[i]);
-    printf("\n%d\n", count);
+    printf("\n%d %d\n", count, countErr);
 
     return 0;
 }

@@ -1,19 +1,19 @@
-//Adapted Rosetta Code
+// Adapted from Rosetta Code.
 
 #include <stdlib.h>
 #include <stdio.h>
 #include <time.h>
 #include <string.h>
-#include <conio.h>
 
-#define MAX 1000000
+#define MAX 10000
 
 int A[MAX], B[MAX];
 double eps;
+int countErr = 0; 
 
 double r()
 {
-	return (double)rand() / (double)RAND_MAX;
+    return (double)rand() / (double)RAND_MAX;
 }
 
 // computes the length of the longest non-decreasing string
@@ -21,21 +21,24 @@ double r()
 int LNDS(int n)
 {
 
-	int max = 1;
-	int len = 1;
-	int i = 1;
+    int max = 1;
+    int len = 1;
+    int i = 1;
 	for (i = 1; i < n; i++)
-	{
-		if (A[i - 1] <= A[i])
-		{
-			len++;
-			if (len > max)
-				max = len;
-		}
-		else
-			len = 1;
-	}
-	return max;
+    {
+        if (A[i - 1] <= A[i])
+        {
+            len++;
+            if (len > max)
+                max = len;
+        }
+        else 
+        { 
+            len = 1;
+            countErr++;
+        }
+    }
+    return max;
 }
 
 void swap(int *a, int *b)
@@ -146,7 +149,7 @@ int main()
 		fprintf(out, " %d", A[i]);
 	}
 	printf("\n");
-	fprintf(out, "\n%d", count);
+	fprintf(out, "\n%d %d", count, countErr);
 
 	// Close Output File
 	fclose(out);
@@ -161,5 +164,5 @@ int main()
 	for (i = 1; i < n; i++)
 		printf(" %d", B[i]);
 
-	printf("\n%d\n", count);
+	printf("\n%d %d\n", count, countErr);
 }
