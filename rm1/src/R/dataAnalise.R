@@ -1,7 +1,7 @@
 install.packages("moments")
 
 # Set working diretory
-setwd("C:\Users\macruz\workspace-doctorate\RM\research-methods1\rm1\src\C")
+setwd("C:/Users/macruz/workspace-doctorate/RM/research-methods1/rm1/src/C")
 
 # Loading dataset
 farmer <- read.table(
@@ -13,7 +13,7 @@ farmer <- read.table(
 
 summary(farmer)
 
-plot(density(farmer))
+var(farmer$V1)
 
 # SAMPLES QUANTITAVIVE
 table(farmer)
