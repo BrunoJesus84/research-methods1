@@ -26,21 +26,67 @@ names(dataset)[4] <- "max_sorted"
 # Summary of Amount of Classification Errors
 summary(dataset$count_err)
 
+x <- dataset$count_err
+
 # Summary of Amount of Classification Errors
 summary(dataset$max_sorted)
 
-plot(density(farmer$count))
+y <- dataset$max_sorted
 
-summary(farmer$current_average)
+# Graph of the density function of the Amount of Classification Errors
+plot(density(dataset$count_err))
 
-# SAMPLES QUANTITAVIVE
-table(farmer$id)
+# Graph of the density function of the maximum ordered quantity attribute
+plot(density(dataset$max_sorted))
 
-# SAMPLES X STAGE
-table(farmer$id, farmer$battery_stage)
+# SAMPLES QUANTITAVIVE BY ALGORITHM
+table(dataset$algorithm)
 
-# install.packages("corrplot")
+# max_sorted X tam
+plot(dataset$max_sorted, dataset$tam, type = "p")
 
-cov(farmer$id, farmer$battery_level)
+# x = count_err
+mean(x)	# Mean of the numbers in vector x.
+median(x)	# Median of the numbers in vector x
+var(x)	# Estimated variance of the population from which the numbers in vector x are sampled
+sd(x)	# Estimated standard deviation of the population from which the numbers in vector x are sampled
+scale(x)	# Standard scores (z-scores) for the numbers in vector x
 
-plot(farmer)
+# y = max_sorted
+mean(y)	# Mean of the numbers in vector x.
+median(y)	# Median of the numbers in vector x
+var(y)	# Estimated variance of the population from which the numbers in vector x are sampled
+sd(y)	# Estimated standard deviation of the population from which the numbers in vector x are sampled
+scale(y)	# Standard scores (z-scores) for the numbers in vector x
+
+dataset
+
+install.packages("corrplot")
+
+library(corrplot)
+
+# Loading dataset
+data <- read.csv(
+  file = "1000data.csv",
+  header = TRUE,
+  sep = ";",
+  dec = ".",
+  stringsAsFactor = TRUE,
+  quote = "\""
+)
+summary(data)
+
+data <- data[,c(2,3,4,5)]
+
+head(data)
+
+M <- cor(data$max,data$count_err)
+round(M, 2)
+
+install.packages("Hmisc")
+
+library(Hmisc)
+
+res2 <- rcorr(as.matrix(data), type = c("pearson","spearman"))
+res2
+corrplot(as.matrix(data), method="circle")
