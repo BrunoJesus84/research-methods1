@@ -83,7 +83,7 @@ FILE *arq, *out;
 	int n, i;
 
 	/* Reads a name of the file to open: */
-	printf("\n\n Enter a file name:\n");
+	printf("\n\n Enter a INPUT file name (eg. data100.in):\n");
 	fgets(name,29,stdin);					
 	for(i=0; name[i]; i++) if(name[i]=='\n') name[i]=0;	/* Remove the "\n" from string */
 
@@ -118,8 +118,8 @@ FILE *arq, *out;
 
     bubble_sort(A, n);
 
-/* Reads a name of the file to open: */
-	printf("\n\n Enter a file name:\n");
+    /* Reads a name of the file to open: */
+	printf("\n\n Enter a OUTPUT file name (eg. 100quick1.out):\n");
 	fgets(name,29,stdin);
 	for(i=0; name[i]; i++) if(name[i]=='\n') name[i]=0;	/* Remove the "\n" from string */
 
@@ -130,13 +130,13 @@ FILE *arq, *out;
 
 	// Write Output File
 	printf("%d", A[0]);
+	fprintf(out, "%d", A[0]);
 	for (i = 1; i < n; i++) {
 		printf(" %d", A[i]);
 		fprintf(out, " %d", A[i]);
 	}
 	printf("\n");
-    
-	fprintf(out, "\n%s;%lf;%d;%d;%d;%d", "bubble", eps, n, count, countErr);
+    fprintf(out, "\n%s;%lf;%d;%d;%d", "bubble", eps, n, count, countErr);
 	
 	// Close Output File
 	fclose(out);

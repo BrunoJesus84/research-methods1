@@ -142,14 +142,13 @@ int main()
 
 	// Write Output File
 	printf("%d", A[0]);
-	fprintf(out, "%lf %d %d", eps, n, A[0]);
-	for (i = 1; i < n; i++)
-	{
+	fprintf(out, "%d", A[0]);
+	for (i = 1; i < n; i++) {
 		printf(" %d", A[i]);
 		fprintf(out, " %d", A[i]);
 	}
 	printf("\n");
-	fprintf(out, "\n%d %d", count, countErr);
+    fprintf(out, "\n%s;%lf;%d;%d;%d", "insertion", eps, n, count, countErr);
 
 	// Close Output File
 	fclose(out);
