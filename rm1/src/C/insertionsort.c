@@ -111,8 +111,7 @@ int main()
                 printf(" %d", A[i]);
         printf("\n");
 
-        insertion_sort(A, n);
-
+    
         /* Reads a name of the file to open: */
 	printf("\n\n Enter a OUTPUT file name (eg. 100quick1.out):\n");
 	fgets(name,29,stdin);
@@ -120,30 +119,36 @@ int main()
 
 	// Open a text file TEXTO in Write Mode
 	out = fopen (name, "w+");
-
-	int count = LNDS(n);
-
-	// Write Output File
-	printf("%d", A[0]);
-	fprintf(out, "%d", A[0]);
-	for (i = 1; i < n; i++) {
-		printf(" %d", A[i]);
-		fprintf(out, " %d", A[i]);
-	}
-	printf("\n");
-        fprintf(out, "\n%s;%lf;%d;%d;%d", "insertion", eps, n, count, countErr);
 	
+	int j = 0;
+    	 
+    for (j = 0; j < 10; j++) {
+	    insertion_sort(A, n);
+		int count = LNDS(n);
+	
+		// Write Output File
+		printf("%d", A[0]);
+		fprintf(out, "%d", A[0]);
+		for (i = 1; i < n; i++) {
+			printf(" %d", A[i]);
+			fprintf(out, " %d", A[i]);
+		}
+		printf("\n");
+	    fprintf(out, "\n%s;%lf;%d;%d;%d\n", "insertion", eps, n, count, countErr);
+		countErr = 0;
+	}
 	// Close Output File
+	
 	fclose(out);
 
 	eps = -1.0;
 
 	printf("Eps - Size: %lf - %d \n", eps, n);
 
-        insertion_sort(B, n);
+	insertion_sort(B, n);
 
-        printf("%d", B[0]);
-        for (i = 1; i < n; i++)
-                printf(" %d", B[i]);
-        printf("\n%d %d\n", count, countErr);
+    printf("%d", B[0]);
+    for (i = 1; i < n; i++)
+        printf(" %d", B[i]);
+//   	printf("\n%d %d\n", count, countErr);
 }
