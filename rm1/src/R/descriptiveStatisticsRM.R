@@ -92,14 +92,9 @@ install.packages("Hmisc")
 
 library(Hmisc)
 
-Mean(as.array(data$max))
-
-res2 <- rcorr(as.matrix(data), type = c("pearson","spearman"))
-res2
-corrplot(as.matrix(data), method="circle")
-
-pdf('myplot3.pdf')
-plot(data$count_err,data$max)
+# ALL
+pdf('plotAll.pdf')
+plot(data$count_err,data$max, col = data$algo, xlab = "Quant. Errors", ylab = "Max Subarray Sorted")
 dev.off()
 
 # DATASET 100
@@ -110,8 +105,8 @@ M <- cor(data100$max,data100$count_err)
 round(M, 2)
 
 
-pdf('myplot100.pdf')
-plot(data100$count_err,data100$max)
+pdf('plot100.pdf')
+plot(data100$count_err,data100$max, col = data100$algo, xlab = "Quant. Errors", ylab = "Max Subarray Sorted")
 dev.off()
 
 # DATASET 1000
@@ -121,8 +116,8 @@ summary(data1000)
 M <- cor(data1000$max,data1000$count_err)
 round(M, 2)
 
-pdf('myplot1000.pdf')
-plot(data1000$count_err,data1000$max)
+pdf('plot1000.pdf')
+plot(data1000$count_err,data1000$max, col = data1000$algo, xlab = "Quant. Errors", ylab = "Max Subarray Sorted")
 dev.off()
 
 
@@ -134,8 +129,8 @@ summary(data10000)
 M <- cor(data10000$max,data10000$count_err)
 round(M, 2)
 
-pdf('myplot10000.pdf')
-plot(data10000$count_err,data10000$max)
+pdf('plot10000.pdf')
+plot(data10000$count_err,data10000$max, col = data10000$algo, xlab = "Quant. Errors", ylab = "Max Subarray Sorted")
 dev.off()
 
 
