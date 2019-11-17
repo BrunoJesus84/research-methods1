@@ -78,7 +78,7 @@ void bubble_sort(int *a, int n)
 int main()
 {
 FILE *arq, *out;
-	char name[30], line[100];
+	char name[30], line[100], name2[30];
   	char *result, *text;
 	int n, i;
 
@@ -116,30 +116,37 @@ FILE *arq, *out;
         printf(" %d", A[i]);
     printf("\n");
 
-    bubble_sort(A, n);
-
     /* Reads a name of the file to open: */
 	printf("\n\n Enter a OUTPUT file name (eg. 100quick1.out):\n");
 	fgets(name,29,stdin);
 	for(i=0; name[i]; i++) if(name[i]=='\n') name[i]=0;	/* Remove the "\n" from string */
+   
+    out = fopen(name, "w+");
 
-	// Open a text file TEXTO in Write Mode
-	out = fopen (name, "w+");
+    int j = 0;
+     
+    for (j = 0; j < 10; j++) {
 
-	int count = LNDS(n);
+        bubble_sort(A, n);
 
-	// Write Output File
-	printf("%d", A[0]);
-	fprintf(out, "%d", A[0]);
-	for (i = 1; i < n; i++) {
-		printf(" %d", A[i]);
-		fprintf(out, " %d", A[i]);
-	}
-	printf("\n");
-    fprintf(out, "\n%s;%lf;%d;%d;%d", "bubble", eps, n, count, countErr);
-	
-	// Close Output File
-	fclose(out);
+        // Open a text file TEXTO in Write Mode
+        int count = LNDS(n);
+
+        // Write Output File
+        printf("%d", A[0]);
+        fprintf(out, "%d", A[0]);
+        for (i = 1; i < n; i++) {
+            printf(" %d", A[i]);
+            fprintf(out, " %d", A[i]);
+        }
+        printf("\n");
+        fprintf(out, "\n%s;%lf;%d;%d;%d\n", "bubble", eps, n, count, countErr);
+
+        countErr = 0;
+        
+    }
+    // Close Output File
+    fclose(out);
 
 	eps = -1.0;
 
@@ -150,7 +157,7 @@ FILE *arq, *out;
     printf("%d", B[0]);
     for (i = 1; i < n; i++)
         printf(" %d", B[i]);
-    printf("\n%d %d\n", count, countErr);
+    //printf("\n%d %d\n", count, countErr);
 
     return 0;
 }
