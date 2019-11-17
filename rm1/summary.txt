@@ -1,0 +1,92 @@
+       algo         eps              tam             max          
+ bubble   :30   Min.   :0.0001   Min.   :  100   Min.   :   14.00  
+ insertion:30   1st Qu.:0.0001   1st Qu.:  100   1st Qu.:   53.75  
+ merge    :30   Median :0.0010   Median : 1000   Median :  276.00  
+ quick    :30   Mean   :0.0037   Mean   : 3700   Mean   : 2242.83  
+                3rd Qu.:0.0100   3rd Qu.:10000   3rd Qu.: 2715.50  
+                Max.   :0.0100   Max.   :10000   Max.   :10000.00  
+   count_err     
+ Min.   : 0.000  
+ 1st Qu.: 3.000  
+ Median : 6.000  
+ Mean   : 9.417  
+ 3rd Qu.:10.000  
+ Max.   :55.000  
+
+
+Correlation Coefficient
+
+https://www.surveysystem.com/correlation.htm#:~:targetText=Correlation%20is%20a%20statistical%20technique,The%20relationship%20isn't%20perfect.
+
+The main result of a correlation is called the correlation coefficient (or "r"). It ranges from -1.0 to +1.0. The closer r is to +1 or -1, the more closely the two variables are related.
+
+If r is close to 0, it means there is no relationship between the variables. If r is positive, it means that as one variable gets larger the other gets larger. If r is negative it means that as one gets larger, the other gets smaller (often called an "inverse" correlation).
+
+While correlation coefficients are normally reported as r = (a value between -1 and +1), squaring them makes then easier to understand. The square of the coefficient (or r square) is equal to the percent of the variation in one variable that is related to the variation in the other. After squaring r, ignore the decimal point. An r of .5 means 25% of the variation is related (.5 squared =.25). An r value of .7 means 49% of the variance is related (.7 squared = .49).
+
+A correlation report can also show a second result of each test - statistical significance. In this case, the significance level will tell you how likely it is that the correlations reported may be due to chance in the form of random sampling error. If you are working with small sample sizes, choose a report format that includes the significance level. This format also reports the sample size.
+
+A key thing to remember when working with correlations is never to assume a correlation means that a change in one variable causes a change in another. Sales of personal computers and athletic shoes have both risen strongly over the years and there is a high correlation between them, but you cannot assume that buying computers causes people to buy athletic shoes (or vice versa).
+
+The second caveat is that the Pearson correlation technique works best with linear relationships: as one variable gets larger, the other gets larger (or smaller) in direct proportion. It does not work well with curvilinear relationships (in which the relationship does not follow a straight line). An example of a curvilinear relationship is age and health care. They are related, but the relationship doesn't follow a straight line. Young children and older people both tend to use much more health care than teenagers or young adults. Multiple regression (also included in the Statistics Module) can be used to examine curvilinear relationships, but it is beyond the scope of this article.
+
+
+> M <- cor(data$max,data$count_err)
+> round(M, 2)
+> [1] -0.36
+
+O coeficiente de correlação de valor -0.36 entre os atributos "data$max" e "data$count_err", que são respectivamente o maior subarray ordenado no dataset e quantidade de erros na ordenação, indica que há uma correlação inversa, ou seja, quanto maior o subarray ordenado, menor será a quantidade de erros.
+
+
+https://pt.wikipedia.org/wiki/Covari%C3%A2ncia
+
+Em teoria da probabilidade e na estatística, a covariância, ou variância conjunta, é uma medida do grau de interdependência (ou inter-relação) numérica entre duas variáveis aleatórias[1]. Assim, variáveis independentes têm covariância zero.
+
+A covariância é por vezes chamada de medida de dependência linear entre as duas variáveis aleatórias.
+
+
+> summary(data100)
+        algo         max           count_err     
+ bubble   :10   Min.   : 14.00   Min.   : 0.000  
+ insertion:10   1st Qu.: 22.00   1st Qu.: 4.000  
+ merge    :10   Median : 39.00   Median : 6.500  
+ quick    :10   Mean   : 40.20   Mean   : 6.625  
+                3rd Qu.: 53.25   3rd Qu.: 8.000  
+                Max.   :100.00   Max.   :16.000  
+
+> M <- cor(data100$max,data100$count_err)
+> round(M, 2)
+[1] -0.78
+
+
+
+> summary(data1000)
+        algo         max          count_err    
+ bubble   :10   Min.   : 55.0   Min.   : 1.00  
+ insertion:10   1st Qu.:159.0   1st Qu.: 5.00  
+ merge    :10   Median :276.0   Median : 9.00  
+ quick    :10   Mean   :345.7   Mean   :16.65  
+                3rd Qu.:454.5   3rd Qu.:21.75  
+                Max.   :985.0   Max.   :55.00 
+
+
+> M <- cor(data1000$max,data1000$count_err)
+> round(M, 2)
+[1] -0.71
+
+
+
+
+> # DATASET 10000
+> data10000 <- subset(data, tam == 10000, select = c("algo","max","count_err"))
+> summary(data10000)
+        algo         max          count_err     
+ bubble   :10   Min.   : 1473   Min.   : 0.000  
+ insertion:10   1st Qu.: 2798   1st Qu.: 0.000  
+ merge    :10   Median : 6778   Median : 2.500  
+ quick    :10   Mean   : 6343   Mean   : 4.975  
+                3rd Qu.:10000   3rd Qu.: 9.000  
+                Max.   :10000   Max.   :17.000  
+> M <- cor(data10000$max,data10000$count_err)
+> round(M, 2)
+[1] -0.87
