@@ -122,8 +122,6 @@ int main()
         printf(" %d", A[i]);
     printf("\n");
 
-    merge_sort(A, n);
-
     /* Reads a name of the file to open: */
 	printf("\n\n Enter a OUTPUT file name (eg. 100quick1.out):\n");
 	fgets(name,29,stdin);
@@ -132,18 +130,26 @@ int main()
 	// Open a text file TEXTO in Write Mode
 	out = fopen (name, "w+");
 
-	int count = LNDS(n);
+    int j = 0;
+     
+    for (j = 0; j < 10; j++) {
 
-    // Write Output File
-	printf("%d", A[0]);
-	fprintf(out, "%d", A[0]);
-	for (i = 1; i < n; i++) {
-		printf(" %d", A[i]);
-		fprintf(out, " %d", A[i]);
-	}
-	printf("\n");
-    fprintf(out, "\n%s;%lf;%d;%d;%d", "merge", eps, n, count, countErr);
-	
+        merge_sort(A, n);
+
+	    int count = LNDS(n);
+
+        // Write Output File
+        printf("%d", A[0]);
+        fprintf(out, "%d", A[0]);
+        for (i = 1; i < n; i++) {
+            printf(" %d", A[i]);
+            fprintf(out, " %d", A[i]);
+        }
+        printf("\n");
+        fprintf(out, "\n%s;%lf;%d;%d;%d\n", "merge", eps, n, count, countErr);
+
+        countErr = 0;
+    }       
 	// Close Output File
 	fclose(out);
 
@@ -156,5 +162,5 @@ int main()
     printf("%d", B[0]);
     for (i = 1; i < n; i++)
         printf(" %d", B[i]);
-    printf("\n%d %d\n", count, countErr);
+    //printf("\n%d %d\n", count, countErr);
 }
