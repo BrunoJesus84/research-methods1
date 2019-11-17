@@ -122,23 +122,22 @@ int main()
 	
 	int j = 0;
     	 
-    for (j = 0; j < 10; j++) {
+        for (j = 0; j < 10; j++) {
 	    insertion_sort(A, n);
-		int count = LNDS(n);
-	
-		// Write Output File
-		printf("%d", A[0]);
-		fprintf(out, "%d", A[0]);
-		for (i = 1; i < n; i++) {
-			printf(" %d", A[i]);
-			fprintf(out, " %d", A[i]);
-		}
-		printf("\n");
+            int count = LNDS(n);
+
+            // Write Output File
+            printf("%d", A[0]);
+            fprintf(out, "%d", A[0]);
+            for (i = 1; i < n; i++) {
+                printf(" %d", A[i]);
+                fprintf(out, " %d", A[i]);
+            }
+            printf("\n");
 	    fprintf(out, "\n%s;%lf;%d;%d;%d\n", "insertion", eps, n, count, countErr);
-		countErr = 0;
+            countErr = 0;
 	}
 	// Close Output File
-	
 	fclose(out);
 
 	eps = -1.0;

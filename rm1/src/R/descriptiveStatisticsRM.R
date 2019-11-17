@@ -1,7 +1,7 @@
 install.packages("moments")
 
 # Set working diretory
-setwd("C:/Users/macruz/workspace-doctorate/RM/research-methods1/rm1/out/1000")
+setwd("C:/Users/macruz/workspace-doctorate/RM/research-methods1/rm1/out")
 
 # Loading dataset
 dataset <- read.table(
@@ -67,7 +67,7 @@ library(corrplot)
 
 # Loading dataset
 data <- read.csv(
-  file = "1000data.csv",
+  file = "data.csv",
   header = TRUE,
   sep = ";",
   dec = ".",
@@ -76,17 +76,66 @@ data <- read.csv(
 )
 summary(data)
 
-data <- data[,c(2,3,4,5)]
+data1 <- data[,c(2,3,4,5)]
 
-head(data)
+head(data1)
 
+# Correlation Coefficient
 M <- cor(data$max,data$count_err)
 round(M, 2)
+
+# 
+MV <- cov(data$max,data$count_err)
+round(MV, 2)
 
 install.packages("Hmisc")
 
 library(Hmisc)
 
+Mean(as.array(data$max))
+
 res2 <- rcorr(as.matrix(data), type = c("pearson","spearman"))
 res2
 corrplot(as.matrix(data), method="circle")
+
+pdf('myplot3.pdf')
+plot(data$count_err,data$max)
+dev.off()
+
+# DATASET 100
+data100 <- subset(data, tam == 100, select = c("algo","max","count_err"))
+summary(data100)
+
+M <- cor(data100$max,data100$count_err)
+round(M, 2)
+
+
+pdf('myplot100.pdf')
+plot(data100$count_err,data100$max)
+dev.off()
+
+# DATASET 1000
+data1000 <- subset(data, tam == 1000, select = c("algo","max","count_err"))
+summary(data1000)
+
+M <- cor(data1000$max,data1000$count_err)
+round(M, 2)
+
+pdf('myplot1000.pdf')
+plot(data1000$count_err,data1000$max)
+dev.off()
+
+
+
+# DATASET 10000
+data10000 <- subset(data, tam == 10000, select = c("algo","max","count_err"))
+summary(data10000)
+
+M <- cor(data10000$max,data10000$count_err)
+round(M, 2)
+
+pdf('myplot10000.pdf')
+plot(data10000$count_err,data10000$max)
+dev.off()
+
+
