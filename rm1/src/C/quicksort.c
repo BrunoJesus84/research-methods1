@@ -138,17 +138,26 @@ int main()
 	// Open a text file TEXTO in Write Mode
 	out = fopen(name, "w+");
 
-	int count = LNDS(n);
+    int j = 0;
+     
+    for (j = 0; j < 10; j++) {
 
-	// Write Output File
-	printf("%d", A[0]);
-	fprintf(out, "%d", A[0]);
-	for (i = 1; i < n; i++) {
-		printf(" %d", A[i]);
-		fprintf(out, " %d", A[i]);
-	}
-	printf("\n");
-    fprintf(out, "\n%s;%lf;%d;%d;%d", "insertion", eps, n, count, countErr);
+		quicksort(A, 0, n - 1);
+
+	    int count = LNDS(n);
+
+        // Write Output File
+        printf("%d", A[0]);
+        fprintf(out, "%d", A[0]);
+        for (i = 1; i < n; i++) {
+            printf(" %d", A[i]);
+            fprintf(out, " %d", A[i]);
+        }
+        printf("\n");
+        fprintf(out, "\n%s;%lf;%d;%d;%d\n", "quick", eps, n, count, countErr);
+
+        countErr = 0;
+    }       
 
 	// Close Output File
 	fclose(out);
@@ -163,5 +172,5 @@ int main()
 	for (i = 1; i < n; i++)
 		printf(" %d", B[i]);
 
-	printf("\n%d %d\n", count, countErr);
+//	printf("\n%d %d\n", count, countErr);
 }
