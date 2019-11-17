@@ -78,7 +78,7 @@ void bubble_sort(int *a, int n)
 int main()
 {
 FILE *arq, *out;
-	char name[30], line[100], name2[30];
+	char name[30] = "data100.in", line[100];
   	char *result, *text;
 	int n, i;
 
