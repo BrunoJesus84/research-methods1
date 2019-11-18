@@ -93,34 +93,31 @@ install.packages("Hmisc")
 library(Hmisc)
 
 # ALL
-pdf('plotAll.pdf')
+pdf('plotAll_.pdf')
 plot(data$count_err,data$max, col = data$algo, xlab = "Quant. Errors", ylab = "Max Subarray Sorted")
 dev.off()
 
 # DATASET 100
-data100 <- subset(data, tam == 100, select = c("algo","max","count_err"))
+data100 <- subset(data, tam == 100 & recursive == "FALSE", select = c("algo","max","count_err"))
 summary(data100)
 
 M <- cor(data100$max,data100$count_err)
 round(M, 2)
-
 
 pdf('plot100.pdf')
 plot(data100$count_err,data100$max, col = data100$algo, xlab = "Quant. Errors", ylab = "Max Subarray Sorted")
 dev.off()
 
 # DATASET 1000
-data1000 <- subset(data, tam == 1000, select = c("algo","max","count_err"))
+data1000 <- subset(data, tam == 1000 & recursive == "FALSE", select = c("algo","max","count_err"))
 summary(data1000)
 
 M <- cor(data1000$max,data1000$count_err)
 round(M, 2)
 
-pdf('plot1000.pdf')
+pdf('plot1000___.pdf')
 plot(data1000$count_err,data1000$max, col = data1000$algo, xlab = "Quant. Errors", ylab = "Max Subarray Sorted")
 dev.off()
-
-
 
 # DATASET 10000
 data10000 <- subset(data, tam == 10000, select = c("algo","max","count_err"))
