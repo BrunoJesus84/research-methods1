@@ -148,7 +148,10 @@ int main()
         printf("\n");
         fprintf(out, "\n%s;%lf;%d;%d;%d\n", "merge", eps, n, count, countErr);
 
+        // Reset errors count
         countErr = 0;
+        // Reset array for original sorting
+        memcpy(A, B, sizeof(B));  
     }       
 	// Close Output File
 	fclose(out);

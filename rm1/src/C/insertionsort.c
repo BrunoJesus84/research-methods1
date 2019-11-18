@@ -123,19 +123,23 @@ int main()
 	int j = 0;
     	 
         for (j = 0; j < 10; j++) {
-	    insertion_sort(A, n);
-            int count = LNDS(n);
+	        insertion_sort(A, n);
+                int count = LNDS(n);
 
-            // Write Output File
-            printf("%d", A[0]);
-            fprintf(out, "%d", A[0]);
-            for (i = 1; i < n; i++) {
-                printf(" %d", A[i]);
-                fprintf(out, " %d", A[i]);
-            }
-            printf("\n");
-	    fprintf(out, "\n%s;%lf;%d;%d;%d\n", "insertion", eps, n, count, countErr);
-            countErr = 0;
+                // Write Output File
+                printf("%d", A[0]);
+                fprintf(out, "%d", A[0]);
+                for (i = 1; i < n; i++) {
+                        printf(" %d", A[i]);
+                        fprintf(out, " %d", A[i]);
+                }
+                printf("\n");
+	        fprintf(out, "\n%s;%lf;%d;%d;%d\n", "insertion", eps, n, count, countErr);
+                
+                // Reset errors count
+                countErr = 0;
+                // Reset array for original sorting
+                memcpy(A, B, sizeof(B));  
 	}
 	// Close Output File
 	fclose(out);
@@ -146,8 +150,8 @@ int main()
 
 	insertion_sort(B, n);
 
-    printf("%d", B[0]);
-    for (i = 1; i < n; i++)
-        printf(" %d", B[i]);
+        printf("%d", B[0]);
+        for (i = 1; i < n; i++)
+                printf(" %d", B[i]);
 //   	printf("\n%d %d\n", count, countErr);
 }
