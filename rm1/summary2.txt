@@ -1,0 +1,149 @@
+
+> summary(data) # with error data
+        algo          eps                tam             max         
+ bubble   :160   Min.   :0.000100   Min.   :  100   Min.   :   14.0  
+ insertion:160   1st Qu.:0.000100   1st Qu.:  100   1st Qu.:   74.0  
+ merge    :160   Median :0.001000   Median : 1000   Median :  100.0  
+ quick    :160   Mean   :0.003475   Mean   : 2912   Mean   : 1176.0  
+                 3rd Qu.:0.010000   3rd Qu.: 3250   3rd Qu.:  854.8  
+                 Max.   :0.010000   Max.   :10000   Max.   :10000.0  
+   count_err      recursive      
+ Min.   :  0.00   Mode :logical  
+ 1st Qu.:  0.00   FALSE:496      
+ Median :  4.00   TRUE :144      
+ Mean   : 34.91                  
+ 3rd Qu.: 17.00                  
+ Max.   :700.00 
+
+ > summary(dataClean) # without error data
+        algo          eps                tam             max       
+ bubble   :124   Min.   :0.000100   Min.   :  100   Min.   :   14  
+ insertion:124   1st Qu.:0.000100   1st Qu.:  100   1st Qu.:   70  
+ merge    :124   Median :0.001000   Median : 1000   Median :  189  
+ quick    :124   Mean   :0.003671   Mean   : 3598   Mean   : 1434  
+                 3rd Qu.:0.010000   3rd Qu.:10000   3rd Qu.: 1000  
+                 Max.   :0.010000   Max.   :10000   Max.   :10000  
+   count_err     
+ Min.   :  0.00  
+ 1st Qu.:  1.00  
+ Median :  5.00  
+ Mean   : 41.19  
+ 3rd Qu.: 22.00  
+ Max.   :700.00  
+
+
+> # ALL
+> pdf('plotAll.pdf')
+> plot(data$count_err,data$max, col = data$algo, main = "ALL DATA", xlab = "Quant. Errors", ylab = "Max Subarray Sorted")
+> dev.off()
+null device 
+          1 
+> # DATASET 100
+> data100 <- subset(data, tam == 100, select = c("algo","max","count_err"))
+> summary(data100)
+        algo         max           count_err    
+ bubble   :42   Min.   : 14.00   Min.   : 0.00  
+ insertion:42   1st Qu.: 39.75   1st Qu.: 0.00  
+ merge    :42   Median : 63.00   Median : 2.00  
+ quick    :42   Mean   : 65.55   Mean   : 3.31  
+                3rd Qu.:100.00   3rd Qu.: 5.00  
+                Max.   :100.00   Max.   :16.00  
+> M <- cor(data100$max,data100$count_err)
+> round(M, 2)
+[1] -0.87
+> pdf('plot100.pdf')
+> plot(data100$count_err,data100$max, col = data100$algo, main = "DATA 100", xlab = "Quant. Errors", ylab = "Max Subarray Sorted")
+> dev.off()
+null device 
+          1 
+> # DATASET 1000
+> data1000 <- subset(data, tam == 1000, select = c("algo","max","count_err"))
+> summary(data1000)
+        algo         max           count_err     
+ bubble   :42   Min.   :  22.0   Min.   :  0.00  
+ insertion:42   1st Qu.:  78.5   1st Qu.:  3.00  
+ merge    :42   Median : 262.0   Median : 10.00  
+ quick    :42   Mean   : 383.8   Mean   : 29.24  
+                3rd Qu.: 608.2   3rd Qu.: 47.00  
+                Max.   :1000.0   Max.   :156.00  
+> M <- cor(data1000$max,data1000$count_err)
+> round(M, 2)
+[1] -0.65
+> pdf('plot1000.pdf')
+> plot(data1000$count_err,data1000$max, col = data1000$algo, main = "DATA 1000", xlab = "Quant. Errors", ylab = "Max Subarray Sorted")
+> dev.off()
+null device 
+          1 
+> # DATASET 10000
+> data10000 <- subset(data, tam == 10000, select = c("algo","max","count_err"))
+> summary(data10000)
+        algo         max          count_err     
+ bubble   :40   Min.   :   74   Min.   :  0.00  
+ insertion:40   1st Qu.:  792   1st Qu.:  1.00  
+ merge    :40   Median : 2642   Median :  9.00  
+ quick    :40   Mean   : 3974   Mean   : 93.52  
+                3rd Qu.: 6749   3rd Qu.: 51.25  
+                Max.   :10000   Max.   :700.00  
+> M <- cor(data10000$max,data10000$count_err)
+> round(M, 2)
+[1] -0.49
+> pdf('plot10000.pdf')
+> plot(data10000$count_err,data10000$max, col = data10000$algo, main = "DATA 10000", xlab = "Quant. Errors", ylab = "Max Subarray Sorted")
+> dev.off()
+null device 
+          1 
+> # DATASET EPS=0.01
+> data001 <- subset(data, eps == 0.01, select = c("algo","max","count_err"))
+> summary(data001)
+        algo         max           count_err    
+ bubble   :41   Min.   :  14.0   Min.   :  0.0  
+ insertion:41   1st Qu.:  34.0   1st Qu.:  5.0  
+ merge    :41   Median :  57.5   Median : 26.0  
+ quick    :41   Mean   : 191.5   Mean   :101.5  
+                3rd Qu.: 107.8   3rd Qu.: 68.0  
+                Max.   :1829.0   Max.   :700.0  
+> M <- cor(data001$max,data001$count_err)
+> round(M, 2)
+[1] -0.08
+> pdf('plotEPS001.pdf')
+> plot(data001$count_err,data001$max, col = data001$algo, main = "EPS 0.01", xlab = "Quant. Errors", ylab = "Max Subarray Sorted")
+> dev.off()
+null device 
+          1 
+> # DATASET EPS=0.001
+> data0001 <- subset(data, eps == 0.001, select = c("algo","max","count_err"))
+> summary(data0001)
+        algo         max             count_err     
+ bubble   :41   Min.   :   38.00   Min.   :  0.00  
+ insertion:41   1st Qu.:   87.75   1st Qu.:  2.00  
+ merge    :41   Median :  276.00   Median :  5.00  
+ quick    :41   Mean   :  995.92   Mean   : 19.21  
+                3rd Qu.:  665.00   3rd Qu.: 14.50  
+                Max.   :10000.00   Max.   :132.00  
+> M <- cor(data0001$max,data0001$count_err)
+> round(M, 2)
+[1] -0.16
+> pdf('plotEPS0001.pdf')
+> plot(data0001$count_err,data0001$max, col = data0001$algo, main = "EPS 0.001", xlab = "Quant. Errors", ylab = "Max Subarray Sorted")
+> dev.off()
+null device 
+          1 
+> # DATASET EPS=0.0001
+> data00001 <- subset(data, eps == 0.0001, select = c("algo","max","count_err"))
+> summary(data00001)
+        algo         max          count_err    
+ bubble   :42   Min.   :   58   Min.   : 0.00  
+ insertion:42   1st Qu.:  100   1st Qu.: 0.00  
+ merge    :42   Median : 1000   Median : 0.50  
+ quick    :42   Mean   : 3075   Mean   : 3.81  
+                3rd Qu.: 5302   3rd Qu.: 6.00  
+                Max.   :10000   Max.   :22.00  
+> M <- cor(data00001$max,data00001$count_err)
+> round(M, 2)
+[1] -0.2
+> pdf('plotEPS00001.pdf')
+> plot(data00001$count_err,data00001$max, col = data00001$algo, main = "EPS 0.0001", xlab = "Quant. Errors", ylab = "Max Subarray Sorted")
+> dev.off()
+null device 
+          1 
+

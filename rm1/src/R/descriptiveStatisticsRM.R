@@ -66,7 +66,7 @@ install.packages("corrplot")
 library(corrplot)
 
 # Loading dataset
-data <- read.csv(
+dataAll <- read.csv(
   file = "data.csv",
   header = TRUE,
   sep = ";",
@@ -74,49 +74,51 @@ data <- read.csv(
   stringsAsFactor = TRUE,
   quote = "\""
 )
-summary(data)
+# with error data
+summary(dataAll)
 
-data1 <- data[,c(2,3,4,5)]
+# without error data
+dataClean <- subset(dataAll, recursive == "FALSE", select = c("id","algo", "eps", "tam","max","count_err"))
 
-head(data1)
+head(dataClean)
+
+summary(dataClean)
+
+data <- dataClean
 
 # Correlation Coefficient
 M <- cor(data$max,data$count_err)
 round(M, 2)
 
-# 
-MV <- cov(data$max,data$count_err)
-round(MV, 2)
+# install.packages("Hmisc")
 
-install.packages("Hmisc")
-
-library(Hmisc)
+# library(Hmisc)
 
 # ALL
-pdf('plotAll_.pdf')
-plot(data$count_err,data$max, col = data$algo, xlab = "Quant. Errors", ylab = "Max Subarray Sorted")
+pdf('plotAll.pdf')
+plot(data$count_err,data$max, col = data$id, main = "ALL DATA", xlab = "Quant. Errors", ylab = "Max Subarray Sorted")
 dev.off()
 
 # DATASET 100
-data100 <- subset(data, tam == 100 & recursive == "FALSE", select = c("algo","max","count_err"))
+data100 <- subset(data, tam == 100, select = c("algo","max","count_err"))
 summary(data100)
 
 M <- cor(data100$max,data100$count_err)
 round(M, 2)
 
 pdf('plot100.pdf')
-plot(data100$count_err,data100$max, col = data100$algo, xlab = "Quant. Errors", ylab = "Max Subarray Sorted")
+plot(data100$count_err,data100$max, col = data100$algo, main = "DATA 100", xlab = "Quant. Errors", ylab = "Max Subarray Sorted")
 dev.off()
 
 # DATASET 1000
-data1000 <- subset(data, tam == 1000 & recursive == "FALSE", select = c("algo","max","count_err"))
+data1000 <- subset(data, tam == 1000, select = c("algo","max","count_err"))
 summary(data1000)
 
 M <- cor(data1000$max,data1000$count_err)
 round(M, 2)
 
-pdf('plot1000___.pdf')
-plot(data1000$count_err,data1000$max, col = data1000$algo, xlab = "Quant. Errors", ylab = "Max Subarray Sorted")
+pdf('plot1000.pdf')
+plot(data1000$count_err,data1000$max, col = data1000$algo, main = "DATA 1000", xlab = "Quant. Errors", ylab = "Max Subarray Sorted")
 dev.off()
 
 # DATASET 10000
@@ -127,7 +129,170 @@ M <- cor(data10000$max,data10000$count_err)
 round(M, 2)
 
 pdf('plot10000.pdf')
-plot(data10000$count_err,data10000$max, col = data10000$algo, xlab = "Quant. Errors", ylab = "Max Subarray Sorted")
+plot(data10000$count_err,data10000$max, col = data10000$algo, main = "DATA 10000", xlab = "Quant. Errors", ylab = "Max Subarray Sorted")
 dev.off()
 
+# DATASET EPS=0.01
+data001 <- subset(data, eps == 0.01, select = c("id","max","count_err"))
+summary(data001)
 
+M <- cor(data001$max,data001$count_err)
+round(M, 2)
+
+pdf('plotEPS001.pdf')
+plot(data001$count_err,data001$max, col = data001$id, main = "EPS 0.01", xlab = "Quant. Errors", ylab = "Max Subarray Sorted")
+dev.off()
+
+# DATASET EPS=0.001
+data0001 <- subset(data, eps == 0.001, select = c("id","max","count_err"))
+summary(data0001)
+
+M <- cor(data0001$max,data0001$count_err)
+round(M, 2)
+
+pdf('plotEPS0001.pdf')
+plot(data0001$count_err,data0001$max, col = data0001$id, main = "EPS 0.001", xlab = "Quant. Errors", ylab = "Max Subarray Sorted")
+dev.off()
+
+# DATASET EPS=0.0001
+data00001 <- subset(data, eps == 0.0001, select = c("id","max","count_err"))
+summary(data00001)
+
+M <- cor(data00001$max,data00001$count_err)
+round(M, 2)
+
+pdf('plotEPS00001.pdf')
+plot(data00001$count_err,data00001$max, col = data00001$id, main = "EPS 0.0001", xlab = "Quant. Errors", ylab = "Max Subarray Sorted")
+dev.off()
+
+# DATASET EPS=0.0001 AND 10000
+data00001x10000 <- subset(data, eps == 0.0001 & tam == 10000, select = c("id", "algo","max","count_err"))
+summary(data00001x10000)
+
+M <- cor(data00001x10000$max,data00001x10000$count_err)
+round(M, 2)
+
+pdf('plotEPS00001x10000.pdf')
+plot(data00001x10000$count_err,data00001x10000$max, col = data00001x10000$id, main = "EPS=0.0001 and LEN=10000", xlab = "Quant. Errors", ylab = "Max Subarray Sorted")
+text(data00001x10000$count_err,data00001x10000$max, labels = data00001x10000$id, cex= 0.7, pos = 4)
+dev.off()
+
+# DATASET EPS=0.0001 AND 10000
+data00001x10000 <- subset(data, eps == 0.0001 & tam == 10000, select = c("id", "algo","max","count_err"))
+summary(data00001x10000)
+
+M <- cor(data00001x10000$max,data00001x10000$count_err)
+round(M, 2)
+
+pdf('plotEPS00001x10000.pdf')
+plot(data00001x10000$count_err,data00001x10000$max, col = data00001x10000$id, main = "EPS=0.0001 and LEN=10000", xlab = "Quant. Errors", ylab = "Max Subarray Sorted")
+text(data00001x10000$count_err,data00001x10000$max, labels = data00001x10000$id, cex= 0.7, pos = 4)
+dev.off()
+
+# DATASET EPS=0.001 AND 10000
+data0001x10000 <- subset(data, eps == 0.001 & tam == 10000, select = c("id", "algo","max","count_err"))
+summary(data0001x10000)
+
+M <- cor(data0001x10000$max,data0001x10000$count_err)
+round(M, 2)
+
+pdf('plotEPS0001x10000.pdf')
+plot(data0001x10000$count_err,data0001x10000$max, col = data0001x10000$id, main = "EPS=0.001 and LEN=10000", xlab = "Quant. Errors", ylab = "Max Subarray Sorted")
+text(data0001x10000$count_err,data0001x10000$max, labels = data0001x10000$id, cex= 0.7, pos = 4)
+dev.off()
+
+# DATASET EPS=0.01 AND 10000
+data001x10000 <- subset(data, eps == 0.01 & tam == 10000, select = c("id", "algo","max","count_err"))
+summary(data001x10000)
+
+M <- cor(data001x10000$max,data001x10000$count_err)
+round(M, 2)
+
+pdf('plotEPS001x10000.pdf')
+plot(data001x10000$count_err,data001x10000$max, col = data001x10000$id, main = "EPS=0.01 and LEN=10000", xlab = "Quant. Errors", ylab = "Max Subarray Sorted")
+text(data001x10000$count_err,data001x10000$max, labels = data001x10000$id, cex= 0.7, pos = 4)
+dev.off()
+
+# DATASET EPS=0.0001 AND 10000
+data00001x10000 <- subset(data, eps == 0.0001 & tam == 10000, select = c("id", "algo","max","count_err"))
+summary(data00001x10000)
+
+M <- cor(data00001x10000$max,data00001x10000$count_err)
+round(M, 2)
+
+pdf('plotEPS00001x10000.pdf')
+plot(data00001x10000$count_err,data00001x10000$max, col = data00001x10000$id, main = "EPS=0.0001 and LEN=10000", xlab = "Quant. Errors", ylab = "Max Subarray Sorted")
+text(data00001x10000$count_err,data00001x10000$max, labels = data00001x10000$id, cex= 0.7, pos = 4)
+dev.off()
+
+# DATASET EPS=0.0001 AND 1000
+data00001x1000 <- subset(data, eps == 0.0001 & tam == 1000, select = c("id", "algo","max","count_err"))
+summary(data00001x1000)
+
+M <- cor(data00001x1000$max,data00001x1000$count_err)
+round(M, 2)
+
+pdf('plotEPS00001x1000.pdf')
+plot(data00001x1000$count_err,data00001x1000$max, col = data00001x1000$id, main = "EPS=0.0001 and LEN=1000", xlab = "Quant. Errors", ylab = "Max Subarray Sorted")
+text(data00001x1000$count_err,data00001x1000$max, labels = data00001x1000$id, cex= 0.7, pos = 4)
+dev.off()
+
+# DATASET EPS=0.001 AND 1000
+data0001x1000 <- subset(data, eps == 0.001 & tam == 1000, select = c("id", "algo","max","count_err"))
+summary(data0001x1000)
+
+M <- cor(data0001x1000$max,data0001x1000$count_err)
+round(M, 2)
+
+pdf('plotEPS0001x1000.pdf')
+plot(data0001x1000$count_err,data0001x1000$max, col = data0001x1000$id, main = "EPS=0.001 and LEN=1000", xlab = "Quant. Errors", ylab = "Max Subarray Sorted")
+text(data0001x1000$count_err,data0001x1000$max, labels = data0001x1000$id, cex= 0.7, pos = 4)
+dev.off()
+
+# DATASET EPS=0.01 AND 1000
+data001x1000 <- subset(data, eps == 0.01 & tam == 1000, select = c("id", "algo","max","count_err"))
+summary(data001x1000)
+
+M <- cor(data001x1000$max,data001x1000$count_err)
+round(M, 2)
+
+pdf('plotEPS001x1000.pdf')
+plot(data001x1000$count_err,data001x1000$max, col = data001x1000$id, main = "EPS=0.01 and LEN=1000", xlab = "Quant. Errors", ylab = "Max Subarray Sorted")
+text(data001x1000$count_err,data001x1000$max, labels = data001x1000$id, cex= 0.7, pos = 4)
+dev.off()
+
+# DATASET EPS=0.0001 AND 100
+data00001x100 <- subset(data, eps == 0.0001 & tam == 100, select = c("id", "algo","max","count_err"))
+summary(data00001x100)
+
+M <- cor(data00001x100$max,data00001x100$count_err)
+round(M, 2)
+
+pdf('plotEPS00001x100.pdf')
+plot(data00001x100$count_err,data00001x100$max, col = data00001x100$id, main = "EPS=0.0001 and LEN=100", xlab = "Quant. Errors", ylab = "Max Subarray Sorted")
+text(data00001x100$count_err,data00001x100$max, labels = data00001x100$id, cex= 0.7, pos = 4)
+dev.off()
+
+# DATASET EPS=0.001 AND 100
+data0001x100 <- subset(data, eps == 0.001 & tam == 100, select = c("id", "algo","max","count_err"))
+summary(data0001x100)
+
+M <- cor(data0001x100$max,data0001x100$count_err)
+round(M, 2)
+
+pdf('plotEPS0001x100.pdf')
+plot(data0001x100$count_err,data0001x100$max, col = data0001x100$id, main = "EPS=0.001 and LEN=100", xlab = "Quant. Errors", ylab = "Max Subarray Sorted")
+text(data0001x100$count_err,data0001x100$max, labels = data0001x100$id, cex= 0.7, pos = 4)
+dev.off()
+
+# DATASET EPS=0.01 AND 100
+data001x100 <- subset(data, eps == 0.01 & tam == 100, select = c("id", "algo","max","count_err"))
+summary(data001x100)
+
+M <- cor(data001x100$max,data001x100$count_err)
+round(M, 2)
+
+pdf('plotEPS001x100.pdf')
+plot(data001x100$count_err,data001x100$max, col = data001x100$id, main = "EPS=0.01 and LEN=100", xlab = "Quant. Errors", ylab = "Max Subarray Sorted")
+text(data001x100$count_err,data001x100$max, labels = data001x100$id, cex= 0.7, pos = 4)
+dev.off()
