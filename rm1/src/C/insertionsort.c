@@ -122,7 +122,7 @@ int main()
 	
 	int j = 0;
     	 
-        for (j = 0; j < 10; j++) {
+        for (j = 0; j < 40; j++) {
 	        insertion_sort(A, n);
                 int count = LNDS(n);
 

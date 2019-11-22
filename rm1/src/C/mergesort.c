@@ -132,7 +132,7 @@ int main()
 
     int j = 0;
      
-    for (j = 0; j < 10; j++) {
+    for (j = 0; j < 40; j++) {
 
         merge_sort(A, n);
 

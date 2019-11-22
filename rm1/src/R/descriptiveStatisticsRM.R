@@ -289,10 +289,38 @@ dev.off()
 data001x100 <- subset(data, eps == 0.01 & tam == 100, select = c("id", "algo","max","count_err"))
 summary(data001x100)
 
+var(data001x100$max)
+var(data001x100$count_err)
+
 M <- cor(data001x100$max,data001x100$count_err)
 round(M, 2)
 
 pdf('plotEPS001x100.pdf')
 plot(data001x100$count_err,data001x100$max, col = data001x100$id, main = "EPS=0.01 and LEN=100", xlab = "Quant. Errors", ylab = "Max Subarray Sorted")
 text(data001x100$count_err,data001x100$max, labels = data001x100$id, cex= 0.7, pos = 4)
+dev.off()
+
+
+# Loading dataset
+data10 <- read.csv(
+  file = "data10000.csv",
+  header = TRUE,
+  sep = ";",
+  dec = ".",
+  stringsAsFactor = TRUE,
+  quote = "\""
+)
+# with error data
+summary(data10)
+
+
+var(data10$max)
+var(data10$count_err)
+
+M <- cor(data10$max,data10$count_err)
+round(M, 2)
+
+pdf('plotEPS00001x100000_2.pdf')
+plot(data10$count_err,data10$max, col = data10$id, main = "EPS=0.0001 and LEN=10000", xlab = "Quant. Errors", ylab = "Max Subarray Sorted")
+text(data10$count_err,data10$max, labels = data10$id, cex= 0.7, pos = 4)
 dev.off()

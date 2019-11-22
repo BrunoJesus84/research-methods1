@@ -125,7 +125,7 @@ FILE *arq, *out;
 
     int j = 0;
      
-    for (j = 0; j < 10; j++) {
+    for (j = 0; j < 40; j++) {
 
         bubble_sort(A, n);
 
