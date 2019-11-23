@@ -300,7 +300,6 @@ plot(data001x100$count_err,data001x100$max, col = data001x100$id, main = "EPS=0.
 text(data001x100$count_err,data001x100$max, labels = data001x100$id, cex= 0.7, pos = 4)
 dev.off()
 
-
 # Loading dataset
 data10 <- read.csv(
   file = "data10000.csv",
@@ -313,7 +312,6 @@ data10 <- read.csv(
 # with error data
 summary(data10)
 
-
 var(data10$max)
 var(data10$count_err)
 
@@ -324,3 +322,10 @@ pdf('plotEPS00001x100000_2.pdf')
 plot(data10$count_err,data10$max, col = data10$id, main = "EPS=0.0001 and LEN=10000", xlab = "Quant. Errors", ylab = "Max Subarray Sorted")
 text(data10$count_err,data10$max, labels = data10$id, cex= 0.7, pos = 4)
 dev.off()
+
+levels(data10$algo)
+
+install.packages("dplyr")
+
+library(dplyr)
+
