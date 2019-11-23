@@ -70,7 +70,7 @@ void insertion_sort(int *a, int n)
 int main()
 {
 
-        FILE *arq, *out;
+        FILE *arq, *out, *out2;
         char name[30], line[100];
         char *result, *text;
         int n, i;
@@ -113,13 +113,16 @@ int main()
 
     
         /* Reads a name of the file to open: */
-	printf("\n\n Enter a OUTPUT file name (eg. 100quick1.out):\n");
+	printf("\n\n Enter a OUTPUT file name (eg. 100quick001):\n");
 	fgets(name,29,stdin);
 	for(i=0; name[i]; i++) if(name[i]=='\n') name[i]=0;	/* Remove the "\n" from string */
 
+        strcat(name, ".out");
 	// Open a text file TEXTO in Write Mode
 	out = fopen (name, "w+");
-	
+        strcat(name, "2");
+	out2 = fopen (name, "w+");
+        
 	int j = 0;
     	 
         for (j = 0; j < 40; j++) {
@@ -134,7 +137,7 @@ int main()
                         fprintf(out, " %d", A[i]);
                 }
                 printf("\n");
-	        fprintf(out, "\n%s;%lf;%d;%d;%d\n", "insertion", eps, n, count, countErr);
+	        fprintf(out2, "%s;%lf;%d;%d;%d\n", "insertion", eps, n, count, countErr);
                 
                 // Reset errors count
                 countErr = 0;
@@ -143,6 +146,7 @@ int main()
 	}
 	// Close Output File
 	fclose(out);
+        fclose(out2);
 
 	eps = -1.0;
 
