@@ -56,6 +56,50 @@ plot(data001$count_err,data001$max, col = data001$id, main = "EPS=0.01 and LEN=1
 text(data001$count_err,data001$max, labels = data001$id, cex= 0.7, pos = 4)
 dev.off()
 
+# ANOVA
+library(dplyr)
+group_by(data10, algo) %>%
+  summarise(
+    count = n(),
+    mean = mean(max, na.rm = TRUE),
+    sd = sd(max, na.rm = TRUE)
+  )
+
+install.packages("ggpubr")
+install.packages("magrittr")
+library(magrittr)
+library(ggplot2)
+library(ggpubr)
+
+ggboxplot(data10, x = "algo", y = "max", 
+          color = "algo", palette = c("#00DDDD", "#00AFBB", "#E7B800", "#FC4E07"),
+          order = c("bubble", "merge", "quick", "insertion"),
+          ylab = "Length Array", xlab = "Algoritm")
+
+ggboxplot(data10, x = "algo", y = "count_err", 
+          color = "algo", palette = c("#00DDDD", "#00AFBB", "#E7B800", "#FC4E07"),
+          order = c("bubble", "merge", "quick", "insertion"),
+          ylab = "Quant. Errors", xlab = "Algoritm")
+
+# Mean plots
+# ++++++++++++++++++++
+# Plot weight by group
+# Add error bars: mean_se
+# (other values include: mean_sd, mean_ci, median_iqr, ....)
+library("ggpubr")
+ggline(my_data, x = "group", y = "weight", 
+       add = c("mean_se", "jitter"), 
+       order = c("ctrl", "trt1", "trt2"),
+       ylab = "Weight", xlab = "Treatment")
+
+
+
+
+
+
+
+
+
 
 library(ggcorrplot)
 
@@ -67,6 +111,24 @@ head(corr)
 
 ggcorrplot(corr, hc.order = TRUE, type = "lower",
            outline.col = "white")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 # Loading dataset
 dataAll <- read.csv(
