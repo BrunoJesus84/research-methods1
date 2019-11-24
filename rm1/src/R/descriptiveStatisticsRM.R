@@ -295,8 +295,12 @@ var(data001x100$count_err)
 M <- cor(data001x100$max,data001x100$count_err)
 round(M, 2)
 
-pdf('plotEPS001x100.pdf')
+install.packages("ggcorrplot")
+library(ggcorrplot)
+
+pdf('plotEPS001x100L.pdf')
 plot(data001x100$count_err,data001x100$max, col = data001x100$id, main = "EPS=0.01 and LEN=100", xlab = "Quant. Errors", ylab = "Max Subarray Sorted")
+abline(lm(data001x100$count_err ~ data001x100$max))
 text(data001x100$count_err,data001x100$max, labels = data001x100$id, cex= 0.7, pos = 4)
 dev.off()
 
