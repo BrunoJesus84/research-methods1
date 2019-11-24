@@ -74,12 +74,12 @@ library(ggpubr)
 ggboxplot(data10, x = "algo", y = "max", 
           color = "algo", palette = c("#00DDDD", "#00AFBB", "#E7B800", "#FC4E07"),
           order = c("bubble", "merge", "quick", "insertion"),
-          ylab = "Length Array", xlab = "Algoritm")
+          ylab = "Length Array", xlab = "Algorithm")
 
 ggboxplot(data10, x = "algo", y = "count_err", 
           color = "algo", palette = c("#00DDDD", "#00AFBB", "#E7B800", "#FC4E07"),
           order = c("bubble", "merge", "quick", "insertion"),
-          ylab = "Quant. Errors", xlab = "Algoritm")
+          ylab = "Quant. Errors", xlab = "Algorithm")
 
 # Mean plots
 # ++++++++++++++++++++
@@ -87,18 +87,48 @@ ggboxplot(data10, x = "algo", y = "count_err",
 # Add error bars: mean_se
 # (other values include: mean_sd, mean_ci, median_iqr, ....)
 library("ggpubr")
-ggline(my_data, x = "group", y = "weight", 
+ggline(data10, x = "algo", y = "max", 
        add = c("mean_se", "jitter"), 
-       order = c("ctrl", "trt1", "trt2"),
-       ylab = "Weight", xlab = "Treatment")
+       order = c("bubble", "merge", "quick", "insertion"),
+       ylab = "Length Array", xlab = "Algoritm")
+
+# Compute the analysis of variance
+res.aov <- aov(max ~ algo, data = data001)
+# Summary of the analysis
+summary(res.aov)
+
+TukeyHSD(res.aov)
+
+# Compute the analysis of variance
+res.aov <- aov(count_err ~ algo, data = data001)
+# Summary of the analysis
+summary(res.aov)
+
+TukeyHSD(res.aov)
 
 
+#TWO-WAY ANOVA
+library(dplyr)
 
+library("ggpubr")
+pdf("test.pdf")
+ggboxplot(data10, x = "eps", y = "count_err", color = "algo",
+          palette = c("#0055BB", "#E75500", "#E7AF00", "#00B8BB"))
+dev.off()
 
+#library("ggpubr")
+pdf("test.pdf")
+ggline(data10, x = "eps", y = "max", color = "algo",
+       add = c("mean_se"),
+       palette = c("#0055BB", "#E75500", "#E7AF00", "#00B8BB"))
+dev.off()
 
-
-
-
+pdf("test.pdf")
+ggline(data10, x = "eps", y = "count_err", color = "algo",
+       add = c("mean_se"),
+       palette = c("#0055BB", "#E75500", "#E7AF00", "#00B8BB"),
+       xlab = "EPS", ylab = "Quant. Errors")
+dev.off()
 
 
 library(ggcorrplot)
@@ -111,23 +141,6 @@ head(corr)
 
 ggcorrplot(corr, hc.order = TRUE, type = "lower",
            outline.col = "white")
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 # Loading dataset
