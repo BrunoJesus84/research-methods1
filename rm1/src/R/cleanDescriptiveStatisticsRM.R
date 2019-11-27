@@ -48,7 +48,7 @@ data001 <- subset(data10, eps == 0.01, select = c("id", "algo","max","count_err"
 summary(data001)
 
 M <- cor(data001$max,data001$count_err)
-round(M, 2)
+round(M, 1)
 
 pdf('plotEPS001x10mil.pdf')
 plot(data001$count_err,data001$max, col = data001$id, main = "EPS=0.01 and LEN=10000", xlab = "Quant. Errors", ylab = "Max Subarray Sorted")
@@ -110,18 +110,34 @@ TukeyHSD(res.aov)
 #TWO-WAY ANOVA
 library(dplyr)
 
+library(ggplot2)
+library(magrittr)
 library("ggpubr")
+
+pdf('plotAll10.pdf')
+ggdotplot(data10, x = "max", y = "count_err",
+          fill="algo", color = "algo", merge = "flip",
+       palette = c("#000000", "#00FF00", "#0000FF", "#FF0000"),
+       xlab = "EPS", ylab = "Quant. Errors", binwidth = 10)
+dev.off()
+
 pdf("test.pdf")
 ggboxplot(data10, x = "eps", y = "count_err", color = "algo",
+          palette = c("#000000", "#00FF00", "#0000FF", "#FF0000"),
+          xlab = "EPS", ylab = "Quant. Errors")
+dev.off()
+
+pdf("plotBoxTwoWayMaxEps.pdf")
+ggboxplot(data10, x = "eps", y = "max", color = "algo",
           palette = c("#0055BB", "#E75500", "#E7AF00", "#00B8BB"))
 dev.off()
 
-#library("ggpubr")
 pdf("test.pdf")
-ggline(data10, x = "eps", y = "max", color = "algo",
+ggline(data10, x = "eps", y = "max", color = "algo", 
        add = c("mean_se"),
        palette = c("#0055BB", "#E75500", "#E7AF00", "#00B8BB"))
 dev.off()
+
 
 pdf("test.pdf")
 ggline(data10, x = "eps", y = "count_err", color = "algo",
@@ -129,6 +145,27 @@ ggline(data10, x = "eps", y = "count_err", color = "algo",
        palette = c("#0055BB", "#E75500", "#E7AF00", "#00B8BB"),
        xlab = "EPS", ylab = "Quant. Errors")
 dev.off()
+
+pdf("test.pdf")
+ggboxplot(data001, x = "id", y = "count_err", color = "algo",
+       add = c("mean_se"),
+       palette = c("#0055BB", "#E75500", "#E7AF00", "#00B8BB"),
+       xlab = "EPS", ylab = "Quant. Errors")
+dev.off()
+
+pdf("plotBoxTwoWayCountErrorEpsLine10000.pdf")
+boxplot(count_err ~ algo, data = data001, 
+        xlab = "Algorithm",
+        ylab = "Quant. Errors", 
+        main = "Boxplot - amount of errors",
+        notch = TRUE, 
+        varwidth = TRUE, 
+        col = c("black", "blue", "green","red"),
+        names = c("b","i","m","q")
+)
+dev.off()
+
+
 
 
 library(ggcorrplot)
