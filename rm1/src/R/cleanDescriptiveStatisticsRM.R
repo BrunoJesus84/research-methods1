@@ -153,21 +153,53 @@ ggboxplot(data001, x = "id", y = "count_err", color = "algo",
        xlab = "EPS", ylab = "Quant. Errors")
 dev.off()
 
-pdf("plotBoxTwoWayCountErrorEpsLine10000.pdf")
+pdf("plotBoxTwoWayCountError10000.pdf")
 boxplot(count_err ~ algo, data = data001, 
         xlab = "Algorithm",
         ylab = "Quant. Errors", 
-        main = "Boxplot - amount of errors",
+        main = "Boxplot - Amount of Errors",
         notch = TRUE, 
         varwidth = TRUE, 
-        col = c("black", "blue", "green","red"),
+        col = c("blue", "red", "yellow","green"),
         names = c("b","i","m","q")
 )
 dev.off()
 
+pdf("plotBoxTwoWayMax10000.pdf")
+boxplot(max ~ algo, data = data001, 
+        xlab = "Algorithm",
+        ylab = "Length Array", 
+        main = "Boxplot - Max. Sorted Array",
+        notch = TRUE, 
+        varwidth = TRUE, 
+        col = c("blue", "red", "yellow","green"),
+        names = c("b","i","m","q")
+)
+dev.off()
 
+pdf("plotBoxOneWayCountErr10000.pdf")
+ggline(data001, x = "algo", y = "count_err", 
+       add = c("jitter"), 
+       xlab = "Algorithm",
+       ylab = "Quant. Errors", 
+       palette = c("#0000FF", "#FF0000", "#00FFFF","#00FF00"),  
+       order = c("bubble", "insertion", "merge", "quick"),
+       color = "algo")
+dev.off()
 
+library("ggpubr")
 
+pdf("plotBoxOneWayMax10000.pdf")
+ggboxplot(data001, x = "algo", y = "max", 
+       add = c("jitter"), 
+       xlab = "Algorithm",
+       ylab = "Length Array", 
+       palette = c("#0000FF", "#FF0000", "#00FFFF","#00FF00"),  
+       order = c("bubble", "insertion", "merge", "quick"),
+       color = "algo")
+dev.off()
+
+rlang::last_error()
 library(ggcorrplot)
 
 dataCorr2 <- dataAll[,c(3,4,5,6,7)]
